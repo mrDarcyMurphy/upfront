@@ -4,6 +4,11 @@
   "author": "Darcy Murphy",
   "description": "Precompile templates, in order to send them to the browser",
   "keywords": [ "templates" ],
+  "main": "./lib/upfront",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrDarcyMurphy/upfront.git"
+  },
   "devDependencies": {
     "mocha": ">= 0.14.x"
   },
