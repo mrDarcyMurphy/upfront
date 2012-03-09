@@ -1,0 +1,13 @@
+{
+  "name" : "upfront",
+  "version" : "0.0.0",
+  "author": "Darcy Murphy",
+  "description": "Precompile templates, in order to send them to the browser",
+  "keywords": [ "templates" ],
+  "devDependencies": {
+    "mocha": ">= 0.14.x"
+  },
+  "engine": {
+    "node": ">= 0.6.11"
+  }
+}
