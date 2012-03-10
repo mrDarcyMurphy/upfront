@@ -27,4 +27,4 @@ Add an upfront.json file to the root of your views directory. For now upfront on
 
 ## Notes
 
-I'm using (express-expose)[https://github.com/visionmedia/express-expose] to pass the templates to the browser. I figure you could use Browserify as well, but I haven't tested that yet.
+I'm using [express-expose](https://github.com/visionmedia/express-expose) to pass the templates to the browser. I figure you could use Browserify as well, but I haven't tested that yet.
