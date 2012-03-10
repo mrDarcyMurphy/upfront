@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/mrDarcyMurphy/upfront.git"
   },
+  "dependencies" : {
+    "express": "2.5.x"
+  },
   "devDependencies": {
     "mocha": ">= 0.14.x"
   },
