@@ -1,6 +1,6 @@
 {
   "name" : "upfront",
-  "version" : "0.0.0",
+  "version" : "0.1.0",
   "author": "Darcy Murphy",
   "description": "Precompile templates, in order to send them to the browser",
   "keywords": [ "templates" ],
