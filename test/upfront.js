@@ -3,13 +3,13 @@ var express = require('express'),
     should  = require('should');
 
 
-describe('Setups', function(){
+describe('Setup', function(){
 
   describe('fails', function(){
 
-    describe('because', function(){
+    describe('when no callback is given', function(){
       var upfront = require('../lib/upfront.js');
-      it('no callback was given', function(){
+      it('throws an error', function(){
         assert.throws(
           function(){
             upfront.setup();
@@ -19,35 +19,39 @@ describe('Setups', function(){
       });
     });
 
-    describe('because', function(){
+    describe('when app is undefined', function(){
 
       var app, upfront;
 
       beforeEach(function(done){
         upfront = require('../lib/upfront.js');
+        should.not.exist(app);
         done();
       });
 
-      it('app is undefined, when passed as part of an object', function(done){
-        should.not.exist(app);
+      it('returns an error when passed as part of an object', function(done){
         upfront.setup({app:app}, function(err, result){
           should.exist(err);
+          should.equal(err, "app doesn't exist.");
           upfront.config.should.not.have.property('rx');
           upfront.config.should.not.have.property('views');
           done();
         });
       });
-      it('app is undefined, when passed as lone argument', function(done){
-        should.not.exist(app);
+
+      it('returns an error when passed as lone object', function(done){
         upfront.setup(app, function(err, result){
           should.exist(err);
+          should.equal(err, "upfront options are unset.");
           upfront.config.should.not.have.property('rx');
           upfront.config.should.not.have.property('views');
           done();
         });
       });
+
     });
 
+    /*
     describe('because', function(){
 
       var app, upfront;
@@ -70,15 +74,17 @@ describe('Setups', function(){
         var app     = express.createServer(),
             upfront = require('../lib/upfront.js');
         should.exist(app.settings);
-        upfront.setup({app:app}, function(err, result){
+        upfront.setup(app, function(err, result){
           should.exist(err);
           done();
         });
       });
     });
+    */
   });
 
-  describe('Successful', function(){
+  /*
+  describe('succeeds', function(){
 
     it('succeeds when passing app in directly', function(done){
       var app     = express.createServer(),
@@ -158,10 +164,11 @@ describe('Setups', function(){
       });
     });
   });
+  */
 });
 
 
-
+/*
 describe('Default Configuration', function(){
   var app, upfront = require('../lib/upfront.js');
   before(function(done){
@@ -189,8 +196,9 @@ describe('Default Configuration', function(){
   });
 
 });
+*/
 
-
+/*
 describe('Default Template Compilation', function(){
 
   var app, upfront = require('../lib/upfront.js');
@@ -232,8 +240,9 @@ describe('Default Template Compilation', function(){
   });
 
 });
+*/
 
-
+/*
 describe('Custom Configuration', function(){
   var app, upfront = require('../lib/upfront.js');
   before(function(done){
@@ -261,8 +270,9 @@ describe('Custom Configuration', function(){
   });
 
 });
+*/
 
-
+/*
 describe('Custom Template Compilation', function(){
 
   var app, upfront = require('../lib/upfront.js');
@@ -304,4 +314,4 @@ describe('Custom Template Compilation', function(){
   });
 
 });
-
+*/
