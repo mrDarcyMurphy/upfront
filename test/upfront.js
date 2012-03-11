@@ -14,7 +14,7 @@ describe('Setup', function(){
           function(){
             upfront.setup();
           },
-          'upfront was not given a callback'
+          /upfront was not given a callback/
         );
       });
     });
@@ -26,23 +26,21 @@ describe('Setup', function(){
         should.not.exist(app);
         done();
       });
-      it('returns an error when passed as part of an object', function(done){
-        upfront.setup({app:app}, function(err, result){
-          should.exist(err);
-          should.equal(err, "app doesn't exist.");
-          upfront.config.should.not.have.property('rx');
-          upfront.config.should.not.have.property('views');
-          done();
-        });
+      it('throws an error when sent as a lone object', function(){
+        assert.throws(
+          function(){
+            upfront.setup(undefined, function(){});
+          },
+          /upfront options are unset./
+        );
       });
-      it('returns an error when passed as lone object', function(done){
-        upfront.setup(app, function(err, result){
-          should.exist(err);
-          should.equal(err, "upfront options are unset.");
-          upfront.config.should.not.have.property('rx');
-          upfront.config.should.not.have.property('views');
-          done();
-        });
+      it('throws an error when sent as an attribute of an object', function(){
+        assert.throws(
+          function(){
+            upfront.setup({app:undefined}, function(){});
+          },
+          /app doesn't exist./
+        );
       });
     });
 
