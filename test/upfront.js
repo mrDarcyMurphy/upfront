@@ -20,15 +20,12 @@ describe('Setup', function(){
     });
 
     describe('when app is undefined', function(){
-
       var app, upfront;
-
       beforeEach(function(done){
         upfront = require('../lib/upfront.js');
         should.not.exist(app);
         done();
       });
-
       it('returns an error when passed as part of an object', function(done){
         upfront.setup({app:app}, function(err, result){
           should.exist(err);
@@ -38,7 +35,6 @@ describe('Setup', function(){
           done();
         });
       });
-
       it('returns an error when passed as lone object', function(done){
         upfront.setup(app, function(err, result){
           should.exist(err);
@@ -48,39 +44,34 @@ describe('Setup', function(){
           done();
         });
       });
-
     });
 
-    /*
-    describe('because', function(){
-
+    describe('when view path is undefined', function(){
       var app, upfront;
-
       beforeEach(function(done){
+        app     = express.createServer();
         upfront = require('../lib/upfront.js');
+        should.not.exist(app.settings.view);
         done();
       });
-
-      it('view path is undefined, when passed as part of an object', function(done){
-        var app     = express.createServer(),
-            upfront = require('../lib/upfront.js');
+      it('returns an error when passed as part of an object', function(done){
         should.exist(app.settings);
+        should.not.exist(app.settings.view);
         upfront.setup({app:app}, function(err, result){
           should.exist(err);
+          should.equal(err, "Views path doesn't exist.");
           done();
         });
       });
       it('view path is undefined, when app passed as lone argument', function(done){
-        var app     = express.createServer(),
-            upfront = require('../lib/upfront.js');
         should.exist(app.settings);
         upfront.setup(app, function(err, result){
           should.exist(err);
-          done();
+          // done();
         });
       });
     });
-    */
+
   });
 
   /*
