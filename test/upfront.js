@@ -70,6 +70,11 @@ describe('Configuration', function(){
     upfront.config.should.have.property('ignore').with.lengthOf(1);
   });
 
+  it('has a list of extensions to support', function(){
+    upfront.should.have.property('config');
+    upfront.config.should.have.property('extensions').with.lengthOf(4);
+  });
+
 });
 
 
