@@ -39,7 +39,7 @@ describe('Setup', function(){
           function(){
             upfront.setup({app:undefined}, function(){});
           },
-          /app doesn't exist./
+          /express app doesn't exist./
         );
       });
     });
@@ -49,24 +49,25 @@ describe('Setup', function(){
       beforeEach(function(done){
         app     = express.createServer();
         upfront = require('../lib/upfront.js');
-        should.not.exist(app.settings.view);
+        should.exist(app.settings);
+        should.not.exist(app.settings.views);
         done();
       });
-      it('returns an error when passed as part of an object', function(done){
-        should.exist(app.settings);
-        should.not.exist(app.settings.view);
-        upfront.setup({app:app}, function(err, result){
-          should.exist(err);
-          should.equal(err, "Views path doesn't exist.");
-          done();
-        });
+      it('throws an error when app passed as lone object', function(){
+        assert.throws(
+          function(){
+            upfront.setup(app, function(){});
+          },
+          /views path doesn't exist./
+        );
       });
-      it('view path is undefined, when app passed as lone argument', function(done){
-        should.exist(app.settings);
-        upfront.setup(app, function(err, result){
-          should.exist(err);
-          // done();
-        });
+      it('throws an error when app sent as an attribute of an object', function(){
+        assert.throws(
+          function(){
+            upfront.setup({app:app}, function(){});
+          },
+          /views path doesn't exist./
+        );
       });
     });
 
