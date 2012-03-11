@@ -102,15 +102,16 @@ describe('Template Compilation', function(){
 
   it('loads views into app.settings.templates', function(){
     should.exist(app.settings.templates);
-    should.exist(app.settings.templates.md);
-    should.exist(app.settings.templates.html);
-    should.exist(app.settings.templates.utml);
+    should.exist(app.settings.templates['extension_md']);
+    should.exist(app.settings.templates['extension_html']);
+    should.exist(app.settings.templates['extension_utml']);
     should.exist(app.settings.templates['subone/nested']);
     should.exist(app.settings.templates['subone/subtwo/nested2']);
   });
 
   it('ignores unrecognized files', function(){
-    should.not.exist(app.settings.templates.unrecognized);
+    should.not.exist(app.settings.templates['unrecognized']);
+    should.not.exist(app.settings.templates['extension_ejs']);
   });
 
   it('ignores files listed in upfront.json', function(){
