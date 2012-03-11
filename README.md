@@ -2,8 +2,7 @@
 
 While upfront doesn't *require* [express-expose](https://github.com/visionmedia/express-expose), it's mostly useless without it. I figure you could use Browserify as well, but I haven't tested that yet.
 
-Upfront also pairs well with [Mike Frey's](https://github.com/mikefrey) [UTML](https://github.com/mikefrey/UTML) module, which lets you use underscore templates server side, then send them up front (get it) and use the same templates in the browser.
-
+Upfront also pairs well with [Mike Frey's](https://github.com/mikefrey) [UTML](https://github.com/mikefrey/UTML) module, which lets you use underscore templates server side. Use upfront to send your templates up front (get it?) and then you can use the same templates in the browser.
 
 
 ## Usage
