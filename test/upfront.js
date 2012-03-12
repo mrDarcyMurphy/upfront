@@ -5,7 +5,7 @@ var express = require('express'),
 
 describe('Setup', function(){
 
-  describe('fails', function(){
+  describe('FAILS', function(){
 
     describe('when no callback is given', function(){
       var upfront = require('../lib/upfront.js');
@@ -29,7 +29,7 @@ describe('Setup', function(){
       it('throws an error when sent as a lone object', function(){
         assert.throws(
           function(){
-            upfront.setup(undefined, function(){});
+            upfront.setup(app, function(){});
           },
           /upfront options are unset./
         );
@@ -37,7 +37,7 @@ describe('Setup', function(){
       it('throws an error when sent as an attribute of an object', function(){
         assert.throws(
           function(){
-            upfront.setup({app:undefined}, function(){});
+            upfront.setup({app:app}, function(){});
           },
           /express app doesn't exist./
         );
@@ -73,88 +73,86 @@ describe('Setup', function(){
 
   });
 
-  /*
-  describe('succeeds', function(){
+  describe('SUCCEEDS', function(){
 
-    it('succeeds when passing app in directly', function(done){
-      var app     = express.createServer(),
-          upfront = require('../lib/upfront.js');
-      app.configure(function(){
-        app.set('views', __dirname + '/default_config');
-      });
-      should.exist(app.settings);
-      should.exist(app.settings.views);
-      upfront.setup(app, function(err, success){
-        should.equal(false, true, 'need to check for opts.app');
-        should.not.exist(err);
-        should.exist(success);
-        done();
-      });
-    });
+    // it('succeeds when passing app in directly', function(done){
+    //   var app     = express.createServer(),
+    //       upfront = require('../lib/upfront.js');
+    //   app.configure(function(){
+    //     app.set('views', __dirname + '/default_config');
+    //   });
+    //   should.exist(app.settings);
+    //   should.exist(app.settings.views);
+    //   upfront.setup(app, function(err, success){
+    //     should.equal(false, true, 'need to check for opts.app');
+    //     should.not.exist(err);
+    //     should.exist(success);
+    //     done();
+    //   });
+    // });
 
-    it('succeeds with no configuration', function(done){
-      var app     = express.createServer(),
-          upfront = require('../lib/upfront.js');
-      app.configure(function(){
-        app.set('views', __dirname + '/default_config');
-      });
-      should.exist(app.settings);
-      should.exist(app.settings.views);
-      upfront.setup({app:app}, function(err, success){
-        should.not.exist(err);
-        should.exist(success);
-        done();
-      });
-    });
+    // it('succeeds with no configuration', function(done){
+    //   var app     = express.createServer(),
+    //       upfront = require('../lib/upfront.js');
+    //   app.configure(function(){
+    //     app.set('views', __dirname + '/default_config');
+    //   });
+    //   should.exist(app.settings);
+    //   should.exist(app.settings.views);
+    //   upfront.setup({app:app}, function(err, success){
+    //     should.not.exist(err);
+    //     should.exist(success);
+    //     done();
+    //   });
+    // });
 
-    it('succeeds with custom configuration in default file', function(done){
-      var app     = express.createServer(),
-          upfront = require('../lib/upfront.js');
-      app.configure(function(){
-        app.set('views', __dirname + '/custom_config');
-      });
-      should.exist(app.settings);
-      should.exist(app.settings.views);
-      upfront.setup({app:app}, function(err, success){
-        should.not.exist(err);
-        should.exist(success);
-        done();
-      });
-    });
+    // it('succeeds with custom configuration in default file', function(done){
+    //   var app     = express.createServer(),
+    //       upfront = require('../lib/upfront.js');
+    //   app.configure(function(){
+    //     app.set('views', __dirname + '/custom_config');
+    //   });
+    //   should.exist(app.settings);
+    //   should.exist(app.settings.views);
+    //   upfront.setup({app:app}, function(err, success){
+    //     should.not.exist(err);
+    //     should.exist(success);
+    //     done();
+    //   });
+    // });
 
-    it('succeeds with custom configuration options', function(done){
-      var app     = express.createServer(),
-          upfront = require('../lib/upfront.js');
-      app.configure(function(){
-        app.set('views', __dirname + '/custom_config');
-      });
-      should.exist(app.settings);
-      should.exist(app.settings.views);
-      upfront.setup({app:app}, function(err, success){
-        should.equal(false, true, 'Need to write the custom configuration options');
-        should.not.exist(err);
-        should.exist(success);
-        done();
-      });
-    });
+    // it('succeeds with custom configuration options', function(done){
+    //   var app     = express.createServer(),
+    //       upfront = require('../lib/upfront.js');
+    //   app.configure(function(){
+    //     app.set('views', __dirname + '/custom_config');
+    //   });
+    //   should.exist(app.settings);
+    //   should.exist(app.settings.views);
+    //   upfront.setup({app:app}, function(err, success){
+    //     should.equal(false, true, 'Need to write the custom configuration options');
+    //     should.not.exist(err);
+    //     should.exist(success);
+    //     done();
+    //   });
+    // });
 
-    it('succeeds with custom configuration in a specified file', function(done){
-      var app     = express.createServer(),
-          upfront = require('../lib/upfront.js');
-      app.configure(function(){
-        app.set('views', __dirname + '/custom_config');
-      });
-      should.exist(app.settings);
-      should.exist(app.settings.views);
-      upfront.setup({app:app, config:app.settings.views+'/custom.json'}, function(err, success){
-        should.equal(false, true, 'Need to write the custom configuration options');
-        should.not.exist(err);
-        should.exist(success);
-        done();
-      });
-    });
+    // it('succeeds with custom configuration in a specified file', function(done){
+    //   var app     = express.createServer(),
+    //       upfront = require('../lib/upfront.js');
+    //   app.configure(function(){
+    //     app.set('views', __dirname + '/custom_config');
+    //   });
+    //   should.exist(app.settings);
+    //   should.exist(app.settings.views);
+    //   upfront.setup({app:app, config:app.settings.views+'/custom.json'}, function(err, success){
+    //     should.equal(false, true, 'Need to write the custom configuration options');
+    //     should.not.exist(err);
+    //     should.exist(success);
+    //     done();
+    //   });
+    // });
   });
-  */
 });
 
 
