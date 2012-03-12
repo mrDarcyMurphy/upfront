@@ -1,8 +1,8 @@
 ## Notes
 
-While upfront doesn't *require* [express-expose](https://github.com/visionmedia/express-expose), it's mostly useless without it. I figure you could use Browserify as well, but I haven't tested that yet.
+While upfront doesn't *require* [express-expose](https://github.com/visionmedia/express-expose), it's mostly useless without it. I figure you could use [Browserify](https://github.com/substack/node-browserify) as well, but I haven't tested that yet.
 
-Upfront also pairs well with [Mike Frey's](https://github.com/mikefrey) [UTML](https://github.com/mikefrey/UTML) module, which lets you use underscore templates server side. Use upfront to send your templates up front (get it?) and then you can use the same templates in the browser.
+Upfront also pairs well with [Mike Frey's](https://github.com/mikefrey) [UTML](https://github.com/mikefrey/UTML) module, which lets you use underscore templates server side. Use upfront to send your templates up to your front-end *(up, front, get it?)* and then you can use the same templates on the server and in the browser if you're builing a Backbone app.
 
 
 ## Usage
@@ -10,7 +10,6 @@ Upfront also pairs well with [Mike Frey's](https://github.com/mikefrey) [UTML](h
 ### In your app file:
 
 This will send every template you have to the front end. Useful for fat clients.
-
 
 ```javascript
 var upfront = require('upfront');
@@ -23,7 +22,7 @@ upfront.setup(app, function(){
 });
 ```
 
-In your layout, right before the closing `</body>` tag:
+In your layout, assuming you're using express-expose, put this right before the closing `</body>` tag:
 
 ```html
   <%= javascript %>
