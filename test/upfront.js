@@ -79,7 +79,7 @@ describe('Setup', function(){
   describe('Default Configuration', function(){
     describe('SUCCEEDS', function(){
       describe('when passing app', function(done){
-        var app, upfront;
+        var app, upfront, err, success;
         beforeEach(function(done){
           upfront = require('../lib/upfront.js');
           app     = express.createServer();
@@ -97,6 +97,7 @@ describe('Setup', function(){
         it('creates config', function(){
           upfront.setup(app, function(err, success){
             should.exist(upfront.config);
+            console.log(upfront.config);
           });
         });
         it('config has views path', function(){
