@@ -69,62 +69,87 @@ describe('Setup', function(){
           /views path doesn't exist./
         );
       });
+
     });
 
   });
 
-  /*
-    Default Configuration
-      SUCCEEDS
-        when passing app
-        when passing app as attribute
-    Custom Configuration
-      SUCCEEDS
-        when passing app with upfront.js
-        when passing app as attribute with upfront.js
-        when passing app as attribute with config file attribute
-        when passing app as attribute with config as object
-  */
+  // -------------------------
 
   describe('Default Configuration', function(){
     describe('SUCCEEDS', function(){
       describe('when passing app', function(done){
-        it('succeeds', function(){
+        var app, upfront;
+        beforeEach(function(done){
+          upfront = require('../lib/upfront.js');
+          app     = express.createServer();
+          app.set('views', __dirname + '/default_config');
+          should.exist(app.settings);
+          should.exist(app.settings.views);
+          done();
+        });
+        it('returns without error', function(){
+          upfront.setup(app, function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+          });
+        });
+        it('creates config', function(){
+          upfront.setup(app, function(err, success){
+            should.exist(upfront.config);
+          });
+        });
+        it('config has views path', function(){
+          upfront.setup(app, function(err, success){
+            should.have.property(upfront.config, 'views');
+            console.log('upfront.config.views', upfront.config.views);
+          });
+        });
+
+        it('upfront.views matches app.settings.views', function(){
+          // console.log('upfront.config.views', upfront.config.views);
+          // console.log('app.settings.views', app.settings.views);
+          assert.equal(upfront.config.views, app.settings.views);
+          assert.equal(app.settings.views, upfront.config.views);
+        });
+        it('creates a properly formed regex', function(){
           should.equal(false, true, 'test unwritten');
+          // upfront.config.views = app.settings.views;
+          // upfront.config.rx = new RegExp("^"+upfront.config.views+"\/(.*?)\.(html|md|utml)$");
         });
       });
-      describe('when passing app as attribute', function(done){
-        it('succeeds', function(){
-          should.equal(false, true, 'test unwritten');
-        });
-      });
+      // describe('when passing app as attribute', function(done){
+      //   it('succeeds', function(){
+      //     should.equal(false, true, 'test unwritten');
+      //   });
+      // });
     });
   });
 
-  describe('Custom Configuration', function(){
-    describe('SUCCEEDS', function(){
-      describe('when passing app with upfront.js', function(done){
-        it('succeeds', function(){
-          should.equal(false, true, 'test unwritten');
-        });
-      });
-      describe('when passing app as attribute with upfront.js', function(done){
-        it('succeeds', function(){
-          should.equal(false, true, 'test unwritten');
-        });
-      });
-      describe('when passing app as attribute with config file attribute', function(done){
-        it('succeeds', function(){
-          should.equal(false, true, 'test unwritten');
-        });
-      });
-      describe('when passing app as attribute with config as object', function(done){
-        it('succeeds', function(){
-          should.equal(false, true, 'test unwritten');
-        });
-      });
-    });
-  });
+  // describe('Custom Configuration', function(){
+  //   describe('SUCCEEDS', function(){
+  //     describe('when passing app with upfront.js', function(done){
+  //       it('succeeds', function(){
+  //         should.equal(false, true, 'test unwritten');
+  //       });
+  //     });
+  //     describe('when passing app as attribute with upfront.js', function(done){
+  //       it('succeeds', function(){
+  //         should.equal(false, true, 'test unwritten');
+  //       });
+  //     });
+  //     describe('when passing app as attribute with config file attribute', function(done){
+  //       it('succeeds', function(){
+  //         should.equal(false, true, 'test unwritten');
+  //       });
+  //     });
+  //     describe('when passing app as attribute with config as object', function(done){
+  //       it('succeeds', function(){
+  //         should.equal(false, true, 'test unwritten');
+  //       });
+  //     });
+  //   });
+  // });
 
 });
 
