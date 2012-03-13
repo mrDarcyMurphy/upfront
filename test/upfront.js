@@ -69,7 +69,27 @@ describe('Setup', function(){
           /no views path./
         );
       });
+    });
 
+    describe('when upfront.json is corrupted', function(){
+      var app, upfront;
+      beforeEach(function(done){
+        app     = express.createServer();
+        app.set('views', __dirname + '/broken_config');
+        upfront = require('../lib/upfront.js');
+        should.exist(app.settings);
+        should.exist(app.settings.views);
+        done();
+      });
+      it('throws an error when parsing the file', function(){
+        should.equal(true, false, 'test unwritten');
+        // assert.throws(
+        //   function(){
+        //     upfront.setup(app, function(){});
+        //   },
+        //   /no views path./
+        // );
+      });
     });
 
   });
