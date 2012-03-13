@@ -14,7 +14,7 @@ describe('Setup', function(){
           function(){
             upfront.setup();
           },
-          /upfront was not given a callback/
+          /upfront given no callback/
         );
       });
     });
@@ -31,7 +31,7 @@ describe('Setup', function(){
           function(){
             upfront.setup(app, function(){});
           },
-          /upfront options are unset./
+          /upfront options unset./
         );
       });
       it('throws an error when sent as an attribute of an object', function(){
@@ -58,7 +58,7 @@ describe('Setup', function(){
           function(){
             upfront.setup(app, function(){});
           },
-          /views path doesn't exist./
+          /no views path./
         );
       });
       it('throws an error when app sent as an attribute of an object', function(){
@@ -66,7 +66,7 @@ describe('Setup', function(){
           function(){
             upfront.setup({app:app}, function(){});
           },
-          /views path doesn't exist./
+          /no views path./
         );
       });
 
