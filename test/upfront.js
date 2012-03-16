@@ -82,26 +82,11 @@ describe('Setup', function(){
         done();
       });
       it('throws an error when parsing the file', function(done){
-        // assert.throws(
-        //   function() {
-        //     (function() {
-        //       throw new Error("Wrong value");
-        //     });
-        //   },
-        //   Error
-        // );
-        upfront.setup(app, function(e,s){
-          console.log(typeof e, e);
-
-          assert.ifError(e);
+        upfront.setup(app, function(error, success){
+          should.exist(error);
+          should.not.exist(success);
           done();
         });
-        // assert.throws(
-        //   function(){
-        //     upfront.setup(app, function(){});
-        //   },
-        //   /no views path./
-        // );
       });
     });
 
