@@ -81,8 +81,15 @@ describe('Setup', function(){
         should.exist(app.settings.views);
         done();
       });
-      it('throws an error when parsing the file', function(){
-        should.equal(true, false, 'test unwritten');
+      it('throws an error when parsing the file', function(done){
+        assert.throws(
+          function(){
+            upfront.setup(app, function(){
+              done();
+            });
+          },
+          /SyntaxError/
+        );
         // assert.throws(
         //   function(){
         //     upfront.setup(app, function(){});
