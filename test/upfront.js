@@ -97,7 +97,7 @@ describe('Setup', function(){
   describe('Default Configuration', function(){
     describe('SUCCEEDS', function(){
       describe('when passing app', function(done){
-        var app, upfront, err, success;
+        var app, upfront;
         beforeEach(function(done){
           upfront = require('../lib/upfront.js');
           app     = express.createServer();
@@ -140,11 +140,51 @@ describe('Setup', function(){
           });
         });
       });
-      // describe('when passing app as attribute', function(done){
-      //   it('succeeds', function(){
-      //     should.equal(false, true, 'test unwritten');
-      //   });
-      // });
+
+      describe('when passing app as attribute', function(done){
+        var app, upfront;
+        beforeEach(function(done){
+          upfront = require('../lib/upfront.js');
+          app     = express.createServer();
+          app.set('views', __dirname + '/default_config');
+          should.exist(app.settings);
+          should.exist(app.settings.views);
+          done();
+        });
+        it('returns without error', function(done){
+          upfront.setup({app:app}, function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+            done();
+          });
+        });
+        it('creates config', function(done){
+          upfront.setup({app:app}, function(err, success){
+            should.exist(upfront.config);
+            done();
+          });
+        });
+        it('config has views path', function(done){
+          upfront.setup({app:app}, function(err, success){
+            should.exist(upfront.config.views);
+            done();
+          });
+        });
+
+        it('upfront.views matches app.settings.views', function(done){
+          upfront.setup({app:app}, function(err, success){
+            assert.equal(upfront.config.views, app.settings.views);
+            done();
+          });
+        });
+        it('creates a properly formed regex', function(done){
+          upfront.setup({app:app}, function(err, success){
+            upfront.config.rx.should.be.an.instanceof(RegExp);
+            should.equal("/^/Users/mrDarcyMurphy/Sites/upfront/test/default_config/(.*?).(html|jade|md|utml)$/", upfront.config.rx);
+            done();
+          });
+        });
+      });
     });
   });
 
