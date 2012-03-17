@@ -200,6 +200,58 @@ describe('Setup', function(){
           done();
         });
         it('returns without error', function(done){
+          upfront.setup(app, function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+            done();
+          });
+        });
+        it('creates config', function(done){
+          upfront.setup(app, function(err, success){
+            should.exist(upfront.config);
+            done();
+          });
+        });
+        it('config has views path', function(done){
+          upfront.setup(app, function(err, success){
+            should.exist(upfront.config.views);
+            done();
+          });
+        });
+        it('upfront.views matches app.settings.views', function(done){
+          upfront.setup(app, function(err, success){
+            assert.equal(upfront.config.views, app.settings.views);
+            done();
+          });
+        });
+        it('is set to ignore files', function(done){
+          upfront.setup(app, function(err, success){
+            upfront.config.should.have.property('ignore');
+            upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(1);
+            should.deepEqual(upfront.config.ignore, [ "ignore_me" ]);
+            done();
+          });
+        });
+        it('creates a properly formed regex', function(done){
+          var regex = "/^/Users/mrDarcyMurphy/Sites/upfront/test/custom_config/(.*?).(jade|md)$/";
+          upfront.setup(app, function(err, success){
+            upfront.config.rx.should.be.an.instanceof(RegExp);
+            should.equal(regex, upfront.config.rx);
+            done();
+          });
+        });
+      });
+      describe('when passing app as attribute with upfront.json', function(done){
+        var app, upfront;
+        beforeEach(function(done){
+          upfront = require('../lib/upfront.js');
+          app     = express.createServer();
+          app.set('views', __dirname + '/custom_config');
+          should.exist(app.settings);
+          should.exist(app.settings.views);
+          done();
+        });
+        it('returns without error', function(done){
           upfront.setup({app:app}, function(err, success){
             should.not.exist(err);
             should.exist(success);
@@ -241,11 +293,6 @@ describe('Setup', function(){
           });
         });
       });
-  //     describe('when passing app as attribute with upfront.json', function(done){
-  //       it('succeeds', function(){
-  //         should.equal(false, true, 'test unwritten');
-  //       });
-  //     });
   //     describe('when passing app as attribute with config file attribute', function(done){
   //       it('succeeds', function(){
   //         should.equal(false, true, 'test unwritten');
