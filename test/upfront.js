@@ -93,7 +93,7 @@ describe('Setup', function(){
   });
 
   // -------------------------
-  /*
+
   describe('Default Configuration', function(){
     describe('SUCCEEDS', function(){
       describe('when passing app', function(done){
@@ -125,11 +125,15 @@ describe('Setup', function(){
           });
         });
 
-        it('upfront.views matches app.settings.views', function(){
-          // console.log('upfront.config.views', upfront.config.views);
-          // console.log('app.settings.views', app.settings.views);
-          assert.equal(upfront.config.views, app.settings.views);
-          assert.equal(app.settings.views, upfront.config.views);
+        it('upfront.views matches app.settings.views', function(done){
+          upfront.setup(app, function(err, success){
+            // console.log('upfront.config.views', upfront.config.views);
+            // console.log('app.settings.views', app.settings.views);
+
+            assert.equal(upfront.config.views, app.settings.views);
+            // assert.equal(app.settings.views, upfront.config.views);
+            done();
+          });
         });
         it('creates a properly formed regex', function(){
           should.equal(false, true, 'test unwritten');
@@ -144,7 +148,7 @@ describe('Setup', function(){
       // });
     });
   });
-  */
+
   // describe('Custom Configuration', function(){
   //   describe('SUCCEEDS', function(){
   //     describe('when passing app with upfront.js', function(done){
