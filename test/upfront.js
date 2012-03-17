@@ -106,32 +106,29 @@ describe('Setup', function(){
           should.exist(app.settings.views);
           done();
         });
-        it('returns without error', function(){
+        it('returns without error', function(done){
           upfront.setup(app, function(err, success){
             should.not.exist(err);
             should.exist(success);
+            done();
           });
         });
-        it('creates config', function(){
+        it('creates config', function(done){
           upfront.setup(app, function(err, success){
             should.exist(upfront.config);
-            console.log(upfront.config);
+            done();
           });
         });
-        it('config has views path', function(){
+        it('config has views path', function(done){
           upfront.setup(app, function(err, success){
-            should.have.property(upfront.config, 'views');
-            console.log('upfront.config.views', upfront.config.views);
+            should.exist(upfront.config.views);
+            done();
           });
         });
 
         it('upfront.views matches app.settings.views', function(done){
           upfront.setup(app, function(err, success){
-            // console.log('upfront.config.views', upfront.config.views);
-            // console.log('app.settings.views', app.settings.views);
-
             assert.equal(upfront.config.views, app.settings.views);
-            // assert.equal(app.settings.views, upfront.config.views);
             done();
           });
         });
