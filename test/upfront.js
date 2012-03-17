@@ -132,10 +132,12 @@ describe('Setup', function(){
             done();
           });
         });
-        it('creates a properly formed regex', function(){
-          should.equal(false, true, 'test unwritten');
-          // upfront.config.views = app.settings.views;
-          // upfront.config.rx = new RegExp("^"+upfront.config.views+"\/(.*?)\.(html|md|utml)$");
+        it('creates a properly formed regex', function(done){
+          upfront.setup(app, function(err, success){
+            upfront.config.rx.should.be.an.instanceof(RegExp);
+            should.equal("/^/Users/mrDarcyMurphy/Sites/upfront/test/default_config/(.*?).(html|jade|md|utml)$/", upfront.config.rx);
+            done();
+          });
         });
       });
       // describe('when passing app as attribute', function(done){
