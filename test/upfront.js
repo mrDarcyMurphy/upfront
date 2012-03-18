@@ -129,7 +129,9 @@ describe('Setup', function(){
         console.log('-- upfront', upfront);
         beforeEach(function(done){
           console.log('!! upfront', upfront);
-          upfront = new require('../lib/upfront.js');
+          upfront = undefined;
+          console.log('!@ upfront', upfront);
+          upfront = require('../lib/upfront.js');
           console.log('!$ upfront', upfront);
           app     = express.createServer();
           app.set('views', __dirname + '/default_config');
