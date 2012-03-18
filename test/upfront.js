@@ -107,6 +107,15 @@ describe('Setup', function(){
           done();
         });
       });
+      it('destroys config', function(done){
+        upfront.setup({app:app, config:"not_there.json"}, function(error, success){
+          should.exist(error);
+          should.not.exist(success);
+          should.deepEqual(upfront.config, {});
+          done();
+        });
+      });
+
     });
 
   });
@@ -117,8 +126,11 @@ describe('Setup', function(){
     describe('SUCCEEDS', function(){
       describe('when passing app', function(done){
         var app, upfront;
+        console.log('-- upfront', upfront);
         beforeEach(function(done){
-          upfront = require('../lib/upfront.js');
+          console.log('!! upfront', upfront);
+          upfront = new require('../lib/upfront.js');
+          console.log('!$ upfront', upfront);
           app     = express.createServer();
           app.set('views', __dirname + '/default_config');
           should.exist(app.settings);
@@ -315,19 +327,20 @@ describe('Setup', function(){
           });
         });
       });
-    /*
+
       describe('when passing app as attribute with config file attribute', function(done){
-        var app, upfront;
+        var app, upfront, cfg;
         beforeEach(function(done){
           upfront = require('../lib/upfront.js');
           app     = express.createServer();
           app.set('views', __dirname + '/custom_config');
           should.exist(app.settings);
           should.exist(app.settings.views);
+          cfg = app.settings.views + "/upfront_custom.json";
           done();
         });
         it('returns without error', function(done){
-          upfront.setup({app:app, config:"upfront_custom.json"}, function(err, success){
+          upfront.setup({app:app, config:cfg}, function(err, success){
             should.not.exist(err);
             should.exist(success);
             done();
@@ -368,7 +381,6 @@ describe('Setup', function(){
           });
         });
       });
-    */
   //     describe('when passing app as attribute with config as object', function(done){
   //       it('succeeds', function(){
   //         should.equal(false, true, 'test unwritten');
