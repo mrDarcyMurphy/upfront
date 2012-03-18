@@ -370,16 +370,16 @@ describe('Setup', function(){
         it('is set to ignore files', function(done){
           upfront.setup({app:app, config:cfg}, function(err, success){
             upfront.config.should.have.property('ignore');
-            upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(1);
-            should.deepEqual(upfront.config.ignore, [ "ignorance_is_not_a_virtue" ]);
+            upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(3);
+            should.deepEqual(upfront.config.ignore, [ "slugs", "of", "ignorance" ]);
             done();
           });
         });
         it('creates a properly formed regex', function(done){
-          var regex = "/^/Users/mrDarcyMurphy/Sites/upfront/test/custom_config/(.*?).(custom|ext)$/";
-          upfront.setup({app:app, config:"upfront_custom.json"}, function(err, success){
+          upfront.setup({app:app, config:cfg}, function(err, success){
             upfront.config.rx.should.be.an.instanceof(RegExp);
-            should.equal(regex, upfront.config.rx);
+            var rx = ["/^" + __dirname + "/custom_config/(.*?).(custom|json)$/"].join('');
+            should.equal(rx, upfront.config.rx);
             done();
           });
         });

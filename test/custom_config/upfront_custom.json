@@ -1,3 +1,4 @@
 {
-  "extensions": [ "custom", "ext" ]
+  "ignore" : [ "slugs", "of", "ignorance" ],
+  "extensions": [ "custom", "json" ]
 }
