@@ -154,7 +154,8 @@ describe('Setup', function(){
         it('creates a properly formed regex', function(done){
           upfront.setup(app, function(err, success){
             upfront.config.rx.should.be.an.instanceof(RegExp);
-            should.equal("/^/Users/mrDarcyMurphy/Sites/upfront/test/default_config/(.*?).(html|utml)$/", upfront.config.rx);
+            var rx = ["/^" + __dirname + "/default_config/(.*?).(html|utml)$/"].join('');
+            should.equal(rx, upfront.config.rx);
             done();
           });
         });
@@ -198,7 +199,8 @@ describe('Setup', function(){
         it('creates a properly formed regex', function(done){
           upfront.setup({app:app}, function(err, success){
             upfront.config.rx.should.be.an.instanceof(RegExp);
-            should.equal("/^/Users/mrDarcyMurphy/Sites/upfront/test/default_config/(.*?).(html|utml)$/", upfront.config.rx);
+            var rx = ["/^" + __dirname + "/default_config/(.*?).(html|utml)$/"].join('');
+            should.equal(rx, upfront.config.rx);
             done();
           });
         });
@@ -252,10 +254,10 @@ describe('Setup', function(){
           });
         });
         it('creates a properly formed regex', function(done){
-          var regex = "/^/Users/mrDarcyMurphy/Sites/upfront/test/custom_config/(.*?).(jade|md)$/";
           upfront.setup(app, function(err, success){
             upfront.config.rx.should.be.an.instanceof(RegExp);
-            should.equal(regex, upfront.config.rx);
+            var rx = ["/^" + __dirname + "/custom_config/(.*?).(jade|md)$/"].join('');
+            should.equal(rx, upfront.config.rx);
             done();
           });
         });
@@ -305,10 +307,10 @@ describe('Setup', function(){
           });
         });
         it('creates a properly formed regex', function(done){
-          var regex = "/^/Users/mrDarcyMurphy/Sites/upfront/test/custom_config/(.*?).(jade|md)$/";
           upfront.setup({app:app}, function(err, success){
             upfront.config.rx.should.be.an.instanceof(RegExp);
-            should.equal(regex, upfront.config.rx);
+            var rx = ["/^" + __dirname + "/custom_config/(.*?).(jade|md)$/"].join('');
+            should.equal(rx, upfront.config.rx);
             done();
           });
         });
