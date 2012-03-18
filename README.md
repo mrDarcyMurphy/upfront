@@ -1,3 +1,5 @@
+# Upfront v 0.1.0
+
 ## Notes
 
 While upfront doesn't *require* [express-expose](https://github.com/visionmedia/express-expose), it's mostly useless without it. I figure you could use [Browserify](https://github.com/substack/node-browserify) as well, but I haven't tested that yet.
