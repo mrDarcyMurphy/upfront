@@ -145,16 +145,12 @@ describe('Setup', function(){
         it('creates config', function(done){
           upfront.setup(app, function(err, success){
             should.exist(upfront.config);
+            upfront.config.should.have.property('views');
+            upfront.config.should.have.property('rx');
+            upfront.config.should.have.property('extensions');
             done();
           });
         });
-        it('config has views path', function(done){
-          upfront.setup(app, function(err, success){
-            should.exist(upfront.config.views);
-            done();
-          });
-        });
-
         it('upfront.views matches app.settings.views', function(done){
           upfront.setup(app, function(err, success){
             assert.equal(upfront.config.views, app.settings.views);
@@ -191,12 +187,9 @@ describe('Setup', function(){
         it('creates config', function(done){
           upfront.setup({app:app}, function(err, success){
             should.exist(upfront.config);
-            done();
-          });
-        });
-        it('config has views path', function(done){
-          upfront.setup({app:app}, function(err, success){
-            should.exist(upfront.config.views);
+            upfront.config.should.have.property('views');
+            upfront.config.should.have.property('rx');
+            upfront.config.should.have.property('extensions');
             done();
           });
         });
@@ -240,12 +233,9 @@ describe('Setup', function(){
         it('creates config', function(done){
           upfront.setup(app, function(err, success){
             should.exist(upfront.config);
-            done();
-          });
-        });
-        it('config has views path', function(done){
-          upfront.setup(app, function(err, success){
-            should.exist(upfront.config.views);
+            upfront.config.should.have.property('views');
+            upfront.config.should.have.property('rx');
+            upfront.config.should.have.property('extensions');
             done();
           });
         });
@@ -293,12 +283,9 @@ describe('Setup', function(){
         it('creates config', function(done){
           upfront.setup({app:app}, function(err, success){
             should.exist(upfront.config);
-            done();
-          });
-        });
-        it('config has views path', function(done){
-          upfront.setup({app:app}, function(err, success){
-            should.exist(upfront.config.views);
+            upfront.config.should.have.property('views');
+            upfront.config.should.have.property('rx');
+            upfront.config.should.have.property('extensions');
             done();
           });
         });
@@ -345,14 +332,11 @@ describe('Setup', function(){
           });
         });
         it('creates config', function(done){
-          upfront.setup({app:app, config:"upfront_custom.json"}, function(err, success){
+          upfront.setup({app:app, config:cfg}, function(err, success){
             should.exist(upfront.config);
-            done();
-          });
-        });
-        it('config has views path', function(done){
-          upfront.setup({app:app, config:"upfront_custom.json"}, function(err, success){
-            should.exist(upfront.config.views);
+            upfront.config.should.have.property('views');
+            upfront.config.should.have.property('rx');
+            upfront.config.should.have.property('extensions');
             done();
           });
         });
