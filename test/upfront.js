@@ -81,7 +81,7 @@ describe('Setup', function(){
         should.exist(app.settings.views);
         done();
       });
-      it('throws an error when parsing the file', function(done){
+      it('returns an error when parsing the file', function(done){
         upfront.setup(app, function(error, success){
           should.exist(error);
           should.not.exist(success);
