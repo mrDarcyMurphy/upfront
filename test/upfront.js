@@ -341,16 +341,16 @@ describe('Setup', function(){
           });
         });
         it('upfront.views matches app.settings.views', function(done){
-          upfront.setup({app:app, config:"upfront_custom.json"}, function(err, success){
+          upfront.setup({app:app, config:cfg}, function(err, success){
             assert.equal(upfront.config.views, app.settings.views);
             done();
           });
         });
         it('is set to ignore files', function(done){
-          upfront.setup({app:app, config:"upfront_custom.json"}, function(err, success){
+          upfront.setup({app:app, config:cfg}, function(err, success){
             upfront.config.should.have.property('ignore');
             upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(1);
-            should.deepEqual(upfront.config.ignore, [ "ignore_me" ]);
+            should.deepEqual(upfront.config.ignore, [ "ignorance_is_not_a_virtue" ]);
             done();
           });
         });
