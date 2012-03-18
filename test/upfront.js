@@ -148,6 +148,7 @@ describe('Setup', function(){
             upfront.config.should.have.property('views');
             upfront.config.should.have.property('rx');
             upfront.config.should.have.property('extensions');
+            upfront.config.should.have.property('ignore');
             done();
           });
         });
@@ -162,6 +163,14 @@ describe('Setup', function(){
             upfront.config.rx.should.be.an.instanceof(RegExp);
             var rx = ["/^" + __dirname + "/default_config/(.*?).(html|utml)$/"].join('');
             should.equal(rx, upfront.config.rx);
+            done();
+          });
+        });
+        it('ignores nothing', function(done){
+          upfront.setup(app, function(err, success){
+            upfront.config.should.have.property('ignore');
+            upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(0);
+            should.deepEqual(upfront.config.ignore, []);
             done();
           });
         });
@@ -190,6 +199,7 @@ describe('Setup', function(){
             upfront.config.should.have.property('views');
             upfront.config.should.have.property('rx');
             upfront.config.should.have.property('extensions');
+            upfront.config.should.have.property('ignore');
             done();
           });
         });
@@ -204,6 +214,14 @@ describe('Setup', function(){
             upfront.config.rx.should.be.an.instanceof(RegExp);
             var rx = ["/^" + __dirname + "/default_config/(.*?).(html|utml)$/"].join('');
             should.equal(rx, upfront.config.rx);
+            done();
+          });
+        });
+        it('ignores nothing', function(done){
+          upfront.setup(app, function(err, success){
+            upfront.config.should.have.property('ignore');
+            upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(0);
+            should.deepEqual(upfront.config.ignore, []);
             done();
           });
         });
@@ -236,6 +254,7 @@ describe('Setup', function(){
             upfront.config.should.have.property('views');
             upfront.config.should.have.property('rx');
             upfront.config.should.have.property('extensions');
+            upfront.config.should.have.property('ignore');
             done();
           });
         });
@@ -286,6 +305,7 @@ describe('Setup', function(){
             upfront.config.should.have.property('views');
             upfront.config.should.have.property('rx');
             upfront.config.should.have.property('extensions');
+            upfront.config.should.have.property('ignore');
             done();
           });
         });
@@ -337,6 +357,7 @@ describe('Setup', function(){
             upfront.config.should.have.property('views');
             upfront.config.should.have.property('rx');
             upfront.config.should.have.property('extensions');
+            upfront.config.should.have.property('ignore');
             done();
           });
         });
@@ -373,36 +394,6 @@ describe('Setup', function(){
 
 });
 
-
-/*
-describe('Default Configuration', function(){
-  var app, upfront = require('../lib/upfront.js');
-  before(function(done){
-    app = express.createServer();
-    app.configure(function(){
-      app.set('views', __dirname + '/views');
-    });
-    upfront.setup({app:app}, function(err, success){
-      should.not.exist(err);
-      should.exist(success);
-      done();
-    });
-  });
-
-  it('has a list of files to ignore', function(){
-    assert(false, true);
-    upfront.should.have.property('config');
-    upfront.config.should.have.property('ignore').with.lengthOf(1);
-  });
-
-  it('has a list of extensions to support', function(){
-    assert(false, true);
-    upfront.should.have.property('config');
-    upfront.config.should.have.property('extensions').with.lengthOf(4);
-  });
-
-});
-*/
 
 /*
 describe('Default Template Compilation', function(){
