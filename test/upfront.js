@@ -445,9 +445,18 @@ describe('SETUP', function(){
 });
 
 
-// describe('Compilation', function(){
+describe('COMPILATION', function(){
 
-// });
+  describe('Default Configuration', function(){});
+
+  describe('Custom Configuration', function(){
+    describe('when passing app with upfront.json', function(done){});
+    describe('when passing app as attribute with upfront.json', function(done){});
+    describe('when passing app as attribute with config file string', function(done){});
+    describe('when passing app as attribute with config as object', function(done){});
+  });
+
+});
 
 /*
 describe('Default Template Compilation', function(){
