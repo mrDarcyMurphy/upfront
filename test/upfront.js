@@ -126,7 +126,6 @@ describe('Setup', function(){
     describe('SUCCEEDS', function(){
       describe('when passing app', function(done){
         var app, upfront;
-        console.log('-- upfront', upfront);
         beforeEach(function(done){
           upfront = undefined;
           upfront = require('../lib/upfront.js');
