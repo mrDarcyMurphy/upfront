@@ -107,7 +107,7 @@ describe('Setup', function(){
           done();
         });
       });
-      it('destroys config', function(done){
+      it('resets config to empty object', function(done){
         upfront.setup({app:app, config:"not_there.json"}, function(error, success){
           should.exist(error);
           should.not.exist(success);
@@ -128,11 +128,8 @@ describe('Setup', function(){
         var app, upfront;
         console.log('-- upfront', upfront);
         beforeEach(function(done){
-          console.log('!! upfront', upfront);
           upfront = undefined;
-          console.log('!@ upfront', upfront);
           upfront = require('../lib/upfront.js');
-          console.log('!$ upfront', upfront);
           app     = express.createServer();
           app.set('views', __dirname + '/default_config');
           should.exist(app.settings);
