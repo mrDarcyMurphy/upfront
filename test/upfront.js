@@ -3,9 +3,9 @@ var express = require('express'),
     should  = require('should');
 
 
-describe('Setup', function(){
+describe('SETUP', function(){
 
-  describe('FAILS', function(){
+  describe('Fails', function(){
 
     describe('when no callback is given', function(){
       var upfront = require('../lib/upfront.js');
@@ -123,7 +123,7 @@ describe('Setup', function(){
   // -------------------------
 
   describe('Default Configuration', function(){
-    describe('SUCCEEDS', function(){
+    describe('Succeeds', function(){
       describe('when passing app', function(done){
         var app, upfront;
         beforeEach(function(done){
@@ -230,7 +230,7 @@ describe('Setup', function(){
   });
 
   describe('Custom Configuration', function(){
-    describe('SUCCEEDS', function(){
+    describe('Succeeds', function(){
       describe('when passing app with upfront.json', function(done){
         var app, upfront;
         beforeEach(function(done){
@@ -444,6 +444,10 @@ describe('Setup', function(){
   });
 });
 
+
+// describe('Compilation', function(){
+
+// });
 
 /*
 describe('Default Template Compilation', function(){
