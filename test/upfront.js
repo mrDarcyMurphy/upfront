@@ -333,7 +333,7 @@ describe('Setup', function(){
         });
       });
 
-      describe('when passing app as attribute with config file attribute', function(done){
+      describe('when passing app as attribute with config file string', function(done){
         var app, upfront, cfg;
         beforeEach(function(done){
           upfront = require('../lib/upfront.js');
@@ -384,14 +384,64 @@ describe('Setup', function(){
           });
         });
       });
-  //     describe('when passing app as attribute with config as object', function(done){
-  //       it('succeeds', function(){
-  //         should.equal(false, true, 'test unwritten');
-  //       });
-  //     });
+
+      describe('when passing app as attribute with config as object', function(done){
+        var app, upfront,
+            cfg = {
+              "ignore"      : [ "ignorace", "is not a", "virtue" ],
+              "extensions"  : [ "xyz", "rst" ]
+            };
+        beforeEach(function(done){
+          upfront = require('../lib/upfront.js');
+          app     = express.createServer();
+          app.set('views', __dirname + '/custom_config');
+          should.exist(app.settings);
+          should.exist(app.settings.views);
+          done();
+        });
+        it('returns without error', function(done){
+          upfront.setup({app:app, config:cfg}, function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+            done();
+          });
+        });
+        it('creates config', function(done){
+          upfront.setup({app:app, config:cfg}, function(err, success){
+            should.exist(upfront.config);
+            upfront.config.should.have.property('views');
+            upfront.config.should.have.property('rx');
+            upfront.config.should.have.property('extensions');
+            upfront.config.should.have.property('ignore');
+            done();
+          });
+        });
+        it('upfront.views matches app.settings.views', function(done){
+          upfront.setup({app:app, config:cfg}, function(err, success){
+            assert.equal(upfront.config.views, app.settings.views);
+            done();
+          });
+        });
+        it('is set to ignore files', function(done){
+          upfront.setup({app:app, config:cfg}, function(err, success){
+            upfront.config.should.have.property('ignore');
+            upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(3);
+            should.deepEqual(upfront.config.ignore, [ "ignorace", "is not a", "virtue" ]);
+            done();
+          });
+        });
+        it('creates a properly formed regex', function(done){
+          upfront.setup({app:app, config:cfg}, function(err, success){
+            upfront.config.rx.should.be.an.instanceof(RegExp);
+            var rx = ["/^" + __dirname + "/custom_config/(.*?).(xyz|rst)$/"].join('');
+            should.equal(rx, upfront.config.rx);
+            done();
+          });
+        });
+      });
+
     });
   });
-
 });
 
 
