@@ -447,7 +447,29 @@ describe('UpFront', function(){
 
   describe('#compile', function(){
 
-    describe('Default Configuration', function(){});
+    describe('Default Configuration', function(){
+      var app, upfront;
+      beforeEach(function(done){
+        upfront = require('../lib/upfront.js');
+        app     = express.createServer();
+        app.set('views', __dirname + '/default_config');
+        should.exist(app.settings);
+        should.exist(app.settings.views);
+        upfront.setup(app, function(err, success){
+          should.not.exist(err);
+          should.exist(success);
+          done();
+        })
+      });
+
+      it('returns without error', function(){
+        upfront.compile(function(err, success){
+          should.not.exist(err);
+          should.exist(success);
+        });
+      });
+
+    });
 
     describe('Custom Configuration', function(){
       describe('when passing app with upfront.json', function(done){});
