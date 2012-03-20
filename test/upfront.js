@@ -462,12 +462,44 @@ describe('UpFront', function(){
         })
       });
 
-      it('returns without error', function(){
+      it('returns without error', function(done){
         upfront.compile(function(err, success){
           should.not.exist(err);
           should.exist(success);
+          done();
         });
       });
+
+      it('loads all expected templates correctly', function(done){
+        upfront.compile(function(err, success){
+          should.exist(app.settings.templates);
+          app.settings.templates.should.have.property('extension_html');
+          app.settings.templates.should.have.property('extension_utml');
+          app.settings.templates.should.have.property('subone/nested');
+          app.settings.templates.should.have.property('subone/subtwo/nested2');
+          done();
+        });
+      });
+
+      it('ignores unsupported file types by extension', function(done){
+        upfront.compile(function(err, success){
+          should.exist(app.settings.templates);
+          app.settings.templates.should.not.have.property('extension_ejs');
+          app.settings.templates.should.not.have.property('extension_jade');
+          app.settings.templates.should.not.have.property('extension_md');
+          app.settings.templates.should.not.have.property('unrecognized');
+          done();
+        });
+      });
+
+      it('does not ignore file types based on slug name', function(done){
+        upfront.compile(function(err, success){
+          should.exist(app.settings.templates);
+          app.settings.templates.should.have.property('ignore_me');
+          done();
+        });
+      });
+
 
     });
 
