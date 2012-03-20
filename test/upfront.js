@@ -545,9 +545,56 @@ describe('UpFront', function(){
             done();
           });
         });
-
       });
-      describe('when passing app as attribute with upfront.json', function(){});
+      describe('when passing app as attribute with upfront.json', function(){
+        var app, upfront;
+        beforeEach(function(done){
+          upfront = require('../lib/upfront.js');
+          app     = express.createServer();
+          app.set('views', __dirname + '/custom_config');
+          should.exist(app.settings);
+          should.exist(app.settings.views);
+          upfront.setup({app:app}, function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+            done();
+          })
+        });
+        it('returns without error', function(done){
+          upfront.compile(function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+            done();
+          });
+        });
+        it('loads all expected templates correctly', function(done){
+          upfront.compile(function(err, success){
+            should.exist(app.settings.templates);
+            app.settings.templates.should.have.property('extension_jade');
+            app.settings.templates.should.have.property('extension_md');
+            done();
+          });
+        });
+        it('ignores unsupported file types by extension', function(done){
+          upfront.compile(function(err, success){
+            should.exist(app.settings.templates);
+            app.settings.templates.should.not.have.property('extension_ejs');
+            app.settings.templates.should.not.have.property('extension_html');
+            app.settings.templates.should.not.have.property('extension_utml');
+            app.settings.templates.should.not.have.property('unrecognized');
+            app.settings.templates.should.not.have.property('subone/nested');
+            app.settings.templates.should.not.have.property('subone/subtwo/nested2');
+            done();
+          });
+        });
+        it('ignores file types based on slug name', function(done){
+          upfront.compile(function(err, success){
+            should.exist(app.settings.templates);
+            app.settings.templates.should.not.have.property('ignore_me');
+            done();
+          });
+        });
+      });
       describe('when passing app as attribute with config file string', function(){});
       describe('when passing app as attribute with config as object', function(){});
     });
