@@ -505,6 +505,7 @@ describe('UpFront', function(){
           app.set('views', __dirname + '/custom_config');
           should.exist(app.settings);
           should.exist(app.settings.views);
+          should.not.exist(app.settings.templates);
           upfront.setup(app, function(err, success){
             should.not.exist(err);
             should.exist(success);
@@ -554,6 +555,7 @@ describe('UpFront', function(){
           app.set('views', __dirname + '/custom_config');
           should.exist(app.settings);
           should.exist(app.settings.views);
+          should.not.exist(app.settings.templates);
           upfront.setup({app:app}, function(err, success){
             should.not.exist(err);
             should.exist(success);
@@ -595,7 +597,57 @@ describe('UpFront', function(){
           });
         });
       });
-      describe('when passing app as attribute with config file string', function(){});
+      describe('when passing app as attribute with config file string', function(){
+        var app, upfront, cfg;
+        beforeEach(function(done){
+          upfront = require('../lib/upfront.js');
+          app     = express.createServer();
+          app.set('views', __dirname + '/custom_config');
+          should.exist(app.settings);
+          should.exist(app.settings.views);
+          should.not.exist(app.settings.templates);
+          cfg = app.settings.views + "/upfront_custom.json";
+          upfront.setup({app:app,config:cfg}, function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+            done();
+          })
+        });
+        it('returns without error', function(done){
+          upfront.compile(function(err, success){
+            should.not.exist(err);
+            should.exist(success);
+            done();
+          });
+        });
+        it('loads all expected templates correctly', function(done){
+          upfront.compile(function(err, success){
+            should.exist(app.settings.templates);
+            app.settings.templates.should.have.property('extension_custom');
+            app.settings.templates.should.have.property('extension_json');
+            done();
+          });
+        });
+        it('ignores unsupported file types by extension', function(done){
+          upfront.compile(function(err, success){
+            should.exist(app.settings.templates);
+            app.settings.templates.should.not.have.property('extension_ejs');
+            app.settings.templates.should.not.have.property('extension_html');
+            app.settings.templates.should.not.have.property('extension_utml');
+            app.settings.templates.should.not.have.property('unrecognized');
+            app.settings.templates.should.not.have.property('subone/nested');
+            app.settings.templates.should.not.have.property('subone/subtwo/nested2');
+            done();
+          });
+        });
+        it('ignores file types based on slug name', function(done){
+          upfront.compile(function(err, success){
+            should.exist(app.settings.templates);
+            app.settings.templates.should.not.have.property('ignore_me');
+            done();
+          });
+        });
+      });
       describe('when passing app as attribute with config as object', function(){});
     });
 
