@@ -76,6 +76,8 @@ upfront.setup(app, function(err){
 In your layout, assuming you're using express-expose, put this right before the closing `</body>` tag:
 
 ```html
+<body>
+  <!-- ... -->
   <%= javascript %>
 </body>
 ```
@@ -116,8 +118,6 @@ upfront.setup({app:app, config:cfg}, function(err){
 1. **Stuff to ignore.** If, for example, you don't want to include your layout, simply add it's filename, excluding the extension, to an array called "ignore".
 2. **Extensions you care about.** Defaults to html and utml. Set this to whatever you want.
 
-
-#### Example
 
 ```json
 {
