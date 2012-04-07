@@ -32,7 +32,7 @@ In your layout, assuming you're using express-expose, put this right before the 
 ```html
 <body>
   <!-- ... -->
-  <%= javascript %>
+  <script type="text/javascript"><%= javascript %></script>
 </body>
 ```
 
