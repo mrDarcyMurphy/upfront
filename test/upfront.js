@@ -294,8 +294,8 @@ describe('UpFront', function(){
           it('is set to ignore files', function(done){
             upfront.setup(app, function(err, success){
               upfront.config.should.have.property('ignore');
-              upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(1);
-              should.deepEqual(upfront.config.ignore, [ "ignore_me" ]);
+              upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(2);
+              should.deepEqual(upfront.config.ignore, [ "ignore_me", "ignore_me_too" ]);
               done();
             });
           });
@@ -345,8 +345,8 @@ describe('UpFront', function(){
           it('is set to ignore files', function(done){
             upfront.setup({app:app}, function(err, success){
               upfront.config.should.have.property('ignore');
-              upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(1);
-              should.deepEqual(upfront.config.ignore, [ "ignore_me" ]);
+              upfront.config.ignore.should.be.an.instanceof(Array).with.lengthOf(2);
+              should.deepEqual(upfront.config.ignore, [ "ignore_me", "ignore_me_too" ]);
               done();
             });
           });
@@ -570,6 +570,7 @@ describe('UpFront', function(){
           upfront.compile(function(err, success){
             should.exist(app.settings.templates);
             app.settings.templates.should.not.have.property('ignore_me');
+            app.settings.templates.should.not.have.property('ignore_me_too');
             done();
           });
         });
@@ -620,6 +621,7 @@ describe('UpFront', function(){
           upfront.compile(function(err, success){
             should.exist(app.settings.templates);
             app.settings.templates.should.not.have.property('ignore_me');
+            app.settings.templates.should.not.have.property('ignore_me_too');
             done();
           });
         });
@@ -671,6 +673,7 @@ describe('UpFront', function(){
           upfront.compile(function(err, success){
             should.exist(app.settings.templates);
             app.settings.templates.should.not.have.property('ignore_me');
+            app.settings.templates.should.not.have.property('ignore_me_too');
             done();
           });
         });

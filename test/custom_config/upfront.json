@@ -1,4 +1,4 @@
 {
-  "ignore": [ "ignore_me" ],
+  "ignore": [ "ignore_me", "ignore_me_too" ],
   "extensions": [ "jade", "md" ]
 }
