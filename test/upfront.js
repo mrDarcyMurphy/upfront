@@ -117,7 +117,34 @@ describe('UpFront', function(){
             done();
           });
         });
+      });
 
+      describe("when you pass anything other than a function for the callback", function(){
+        var app, upfront;
+        beforeEach(function(done){
+          app     = express.createServer();
+          app.set('views', __dirname + '/broken_config');
+          upfront = require('../lib/upfront.js');
+          should.exist(app.settings);
+          should.exist(app.settings.views);
+          done();
+        });
+        it('throws an error when passing string to file location', function(){
+          assert.throws(
+            function(){
+              upfront.setup(app, __dirname + '/custom_config/upfront.json', function(){});
+            },
+            /Callback is not a function./
+          );
+        });
+        it('throws an error when passing an object', function(){
+          assert.throws(
+            function(){
+              upfront.setup(app, { "ignore" : [ "index" ] }, function(){});
+            },
+            /Callback is not a function./
+          );
+        });
       });
 
     });
