@@ -1,4 +1,4 @@
-# Upfront v 0.2.0
+# Upfront v 0.2.1
 
 Helps setup your front end.
 

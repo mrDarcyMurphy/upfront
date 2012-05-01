@@ -1,6 +1,6 @@
 {
   "name" : "upfront",
-  "version" : "0.2.0",
+  "version" : "0.2.1",
   "author" : "Darcy Murphy",
   "description" : "Helps setup your front end. Precompiles templates to send them to the browser",
   "keywords" : [ "templates" ],
